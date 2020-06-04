@@ -19,9 +19,13 @@ namespace DGD
         public FsmEnum xrController;
 
         [ActionSection("Output")]
+        [UIHint(UIHint.Variable)]
         public FsmString name;
+        [UIHint(UIHint.Variable)]
         public FsmBool isValid;
+        [UIHint(UIHint.Variable)]
         public FsmString manufacturer;
+        [UIHint(UIHint.Variable)]
         public FsmString serialNumber;
 
         private XRControllerInput input;
