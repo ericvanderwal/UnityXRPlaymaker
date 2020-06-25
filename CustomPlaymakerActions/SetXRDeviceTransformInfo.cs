@@ -25,8 +25,8 @@ namespace DGD
         [ActionSection("Options")]
         public FsmBool everyFrame;
 
-                [ActionSection("Event")]
-public FsmEvent noDeviceFound;
+        [ActionSection("Event")]
+        public FsmEvent noDeviceFound;
 
         private XRNode _xrController = XRNode.LeftHand;
         private List<XRNodeState> nodeStates = new List<XRNodeState>();
@@ -57,10 +57,7 @@ public FsmEvent noDeviceFound;
 
         public override void OnUpdate()
         {
-            if (everyFrame.Value)
-            {
-                GetValue();
-            }
+            GetValue();
         }
 
         private bool GetNodeState()
@@ -84,6 +81,8 @@ public FsmEvent noDeviceFound;
 
         void GetValue()
         {
+            GetNodeState();
+            
             if (!position.IsNone) _nodeState.position = position.Value;
             if (!rotation.IsNone) _nodeState.rotation = rotation.Value;
         }

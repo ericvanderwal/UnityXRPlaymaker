@@ -18,7 +18,6 @@ namespace DGD
         public FsmEnum xrController;
 
         [ActionSection("Output")]
-
         [UIHint(UIHint.Variable)]
         public FsmVector3 position;
 
@@ -28,8 +27,8 @@ namespace DGD
         [ActionSection("Options")]
         public FsmBool everyFrame;
 
-                [ActionSection("Event")]
-public FsmEvent noDeviceFound;
+        [ActionSection("Event")]
+        public FsmEvent noDeviceFound;
 
         private XRNode _xrController = XRNode.LeftHand;
         private List<XRNodeState> nodeStates = new List<XRNodeState>();
@@ -62,10 +61,7 @@ public FsmEvent noDeviceFound;
 
         public override void OnUpdate()
         {
-            if (everyFrame.Value)
-            {
-                GetValue();
-            }
+            GetValue();
         }
 
         private bool GetNodeState()
@@ -89,7 +85,17 @@ public FsmEvent noDeviceFound;
 
         void GetValue()
         {
-            position.Value = _nodeState.TryGetPosition(out _position) ? _position : Vector3.zero;
+            GetNodeState();
+
+            if (_nodeState.TryGetPosition(out _position))
+            {
+                position.Value = _position;
+            }
+            else
+            {
+                _position = Vector3.zero;
+            }
+
             rotation.Value = _nodeState.TryGetRotation(out _rotation) ? _rotation : Quaternion.identity;
         }
     }
